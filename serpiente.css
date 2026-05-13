@@ -5,10 +5,25 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+:root {
+    --negro:        #050810;
+    --negro2:       #0d1117;
+    --negro3:       #161b27;
+    --azul-marino:  #1e3a5f;
+    --azul-medio:   #2563eb;
+    --azul-claro:   #3b82f6;
+    --azul-glow:    rgba(37,99,235,0.3);
+    --gris-oscuro:  #374151;
+    --gris-medio:   #6b7280;
+    --gris-claro:   #9ca3af;
+    --blanco:       #e2e8f0;
+    --borde:        #1e3a5f;
+}
+
 body {
     min-height: 100vh;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    color: white;
+    background: linear-gradient(135deg, var(--negro2), var(--negro));
+    color: var(--blanco);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,25 +33,30 @@ body {
 .contenedor-juego {
     width: 100%;
     max-width: 720px;
-    background: #111827;
+    background: var(--negro2);
     border-radius: 20px;
     padding: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--borde);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(37, 99, 235, 0.08);
     text-align: center;
 }
 
 h1 {
     margin-bottom: 10px;
     font-size: 32px;
-    color: #22c55e;
+    color: var(--azul-claro);
+    text-shadow: 0 0 20px var(--azul-glow);
 }
 
 .descripcion {
     margin-bottom: 18px;
-    color: #cbd5e1;
+    color: var(--gris-claro);
     line-height: 1.5;
 }
 
+/* ── PANEL INFO ── */
 .panel-info {
     display: flex;
     justify-content: space-between;
@@ -48,34 +68,40 @@ h1 {
 .tarjeta-info {
     flex: 1;
     min-width: 150px;
-    background: #1f2937;
+    background: var(--negro3);
     padding: 14px;
     border-radius: 14px;
-    border: 1px solid #374151;
+    border: 1px solid var(--borde);
 }
 
 .tarjeta-info span {
     display: block;
     font-size: 14px;
-    color: #94a3b8;
+    color: var(--gris-medio);
     margin-bottom: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
 }
 
 .tarjeta-info strong {
     font-size: 24px;
-    color: #facc15;
+    color: var(--azul-claro);
 }
 
+/* ── CANVAS ── */
 canvas {
     width: 100%;
     max-width: 500px;
-    background: #020617;
-    border: 4px solid #22c55e;
+    background: var(--negro);
+    border: 2px solid var(--azul-marino);
     border-radius: 16px;
     display: block;
     margin: 0 auto 20px auto;
+    box-shadow: 0 0 24px rgba(37, 99, 235, 0.15);
 }
 
+/* ── CONTROLES ── */
 .controles {
     display: grid;
     grid-template-columns: repeat(3, 90px);
@@ -87,26 +113,28 @@ canvas {
 
 .controles button,
 .acciones button {
-    border: none;
+    border: 1px solid var(--azul-marino);
     border-radius: 12px;
     padding: 12px 16px;
-    background: #22c55e;
-    color: #052e16;
+    background: var(--azul-marino);
+    color: var(--blanco);
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
 .controles button:hover,
 .acciones button:hover {
     transform: scale(1.05);
-    background: #86efac;
+    background: var(--azul-medio);
+    box-shadow: 0 0 12px var(--azul-glow);
 }
 
 .vacio {
     visibility: hidden;
 }
 
+/* ── ACCIONES ── */
 .acciones {
     display: flex;
     justify-content: center;
@@ -114,18 +142,39 @@ canvas {
     flex-wrap: wrap;
 }
 
-.acciones .secundario {
-    background: #38bdf8;
-    color: #082f49;
+.acciones button {
+    background: var(--azul-medio);
+    border-color: var(--azul-claro);
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
 }
 
+.acciones button:hover {
+    background: var(--azul-claro);
+}
+
+.acciones .secundario {
+    background: var(--negro3);
+    border-color: var(--gris-oscuro);
+    color: var(--gris-claro);
+}
+
+.acciones .secundario:hover {
+    background: var(--gris-oscuro);
+    color: var(--blanco);
+    box-shadow: none;
+}
+
+/* ── MENSAJE ── */
 .mensaje {
     margin-top: 14px;
-    color: #e2e8f0;
+    color: var(--gris-claro);
     min-height: 24px;
     font-weight: bold;
 }
 
+/* ── RESPONSIVE ── */
 @media (max-width: 520px) {
     h1 {
         font-size: 24px;
@@ -139,4 +188,31 @@ canvas {
     .acciones button {
         padding: 10px;
     }
+}
+
+/* ── INSTRUCCIONES ── */
+.instrucciones {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+    background: var(--negro3);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    padding: 16px 20px;
+    text-align: left;
+}
+
+.instruccion-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: var(--gris-claro);
+}
+
+.instruccion-icono {
+    font-size: 1rem;
+    min-width: 32px;
+    text-align: center;
 }
