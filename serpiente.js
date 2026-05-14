@@ -8,6 +8,12 @@ const cellSize = 25;
 function drawAll() {
   cleanCanvas();
   drawBoard();
+  fillCell(5,5)
+  fillCell(10,2)
+  fillCell(7,19)
+  fillCell(23,7)
+  fillCell(0,12)
+  fillCell(23,0)
 }
 
 function cleanCanvas() {
@@ -33,7 +39,15 @@ const drawBoard = () => {
     ctx.stroke();
   }
 
-  
 };
+
+// PINTAR PARTE
+
+const fillCell = (lineX, lineY) => {
+  ctx.fillStyle = "red"
+  ctx.fillRect(lineX*cellSize, lineY*cellSize, cellSize, cellSize);
+  ctx.strokeStyle = "gray";
+  ctx.strokeRect(lineX * cellSize, lineY * cellSize, cellSize, cellSize);
+}
 
 drawAll();
